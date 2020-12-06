@@ -26,7 +26,7 @@
 
 ### 范例一:那个 /etc/man_db.conf 里面到底有多少相关字、行、字符数?
 
-[dmtsai@study ~]$ cat /etc/man_db.conf &#124; wc
+[dmtsai@study ~]$ cat /etc/man_db.conf | wc
 
 131 723 5171
 
@@ -34,13 +34,11 @@
 
 
 
-### 范例二:我知道使用 last 可以输出登陆者，但是 last 最后两行并非帐号内容，那么请问，
+### 范例二:我知道使用 last 可以输出登陆者，但是 last 最后两行并非帐号内容，那么请问，我该如何以一行指令串取得登陆系统的总人次?
 
-我该如何以一行指令串取得登陆系统的总人次?
+[dmtsai@study ~]$ last | grep [a-zA-Z] | grep -v 'wtmp' | grep -v 'reboot'
 
-[dmtsai@study ~]$ last &#124; grep [a-zA-Z] &#124; grep -v 'wtmp' &#124; grep -v 'reboot'
-
-&gt; grep -v 'unknown' &#124;wc -l
+&gt; grep -v 'unknown' |wc -l
 
 \# 由于 last 会输出空白行, wtmp, unknown, reboot 等无关帐号登陆的信息，因此，我利用
 

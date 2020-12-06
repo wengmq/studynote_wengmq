@@ -24,13 +24,13 @@
 
 ### 范例一:使用 last 将帐号列出，仅取出帐号栏，进行排序后仅取出一位;
 
-[dmtsai@study ~]$ last &#124; cut -d ' ' -f1 &#124; sort &#124; uniq
+[dmtsai@study ~]$ last | cut -d ' ' -f1 | sort | uniq
 
 
 
 ### 范例二:承上题，如果我还想要知道每个人的登陆总次数呢?
 
-[dmtsai@study ~]$ last &#124; cut -d ' ' -f1 &#124; sort &#124; uniq -c
+[dmtsai@study ~]$ last | cut -d ' ' -f1 | sort | uniq -c
 
 1
 

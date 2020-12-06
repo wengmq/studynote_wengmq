@@ -34,7 +34,7 @@ sort 是很有趣的指令，他可以帮我们进行排序，而且可以依据
 
 ### 范例一:个人帐号都记录在 /etc/passwd 下，请将帐号进行排序。
 
-[dmtsai@study ~]$ cat /etc/passwd &#124; sort
+[dmtsai@study ~]$ cat /etc/passwd | sort
 
 ```
 abrt:x:173:173::/etc/abrt:/sbin/nologin
@@ -42,7 +42,7 @@ adm:x:3:4:adm:/var/adm:/sbin/nologin
 alex:x:1001:1002::/home/alex:/bin/bash
 ```
 
-\# 鸟哥省略很多的输出~由上面的数据看起来， sort 是默认“以第一个”数据来排序，
+\# 这里省略很多的输出~由上面的数据看起来， sort 是默认“以第一个”数据来排序，
 
 \# 而且默认是以“文字”型态来排序的喔!所以由 a 开始排到最后啰!
 
@@ -50,7 +50,7 @@ alex:x:1001:1002::/home/alex:/bin/bash
 
 ### 范例二:/etc/passwd 内容是以 : 来分隔的，我想以第三栏来排序，该如何?
 
-[dmtsai@study ~]$ cat /etc/passwd &#124; sort -t ':' -k 3
+[dmtsai@study ~]$ cat /etc/passwd | sort -t ':' -k 3
 
 ```
 root:x:0:0:root:/root:/bin/bash
@@ -63,7 +63,7 @@ arod:x:1002:1003::/home/arod:/bin/bash
 
 \# 如果是以文字体态来排序的话，原本就会是这样，想要使用数字排序:
 
-\# cat /etc/passwd &#124; sort -t ':' -k 3 -n
+\# cat /etc/passwd | sort -t ':' -k 3 -n
 
 \# 这样才行啊!用那个 -n 来告知 sort 以数字来排序啊!
 
@@ -71,4 +71,4 @@ arod:x:1002:1003::/home/arod:/bin/bash
 
 ### 范例三:利用 last ，将输出的数据仅取帐号，并加以排序 
 
-[dmtsai@study ~]$ last &#124; cut -d ' ' -f1 &#124; sort
+[dmtsai@study ~]$ last | cut -d ' ' -f1 | sort
