@@ -1,4 +1,4 @@
-# Python可视化神器——pyecharts
+# Python可视化神器——pyecharts+jupyter
 
 ### **前言**
 
@@ -49,7 +49,7 @@ bar.render()
 
 ### **饼图-Pie**
 
-```
+```python
 //导入饼图Pie
 from pyecharts import Pie
 //设置主标题与副标题，标题设置居中，设置宽度为900
@@ -68,7 +68,7 @@ pie.render()
 
 ### **箱体图-Boxplot**
 
-```
+```python
 //导入箱型图Boxplot
 from pyecharts import Boxplot 
 boxplot = Boxplot("箱形图", "一年的降水量与蒸发量")
@@ -88,7 +88,7 @@ boxplot.render()
 
 ### **折线图-Line**
 
-```
+```python
 from pyecharts import Line
 line = Line("折线图","一年的降水量与蒸发量")
 //is_label_show是设置上方数据是否显示
@@ -134,7 +134,7 @@ radar.render()
 
 ### **散点图-scatter**
 
-```
+```python
 from pyecharts import Scatter
 scatter = Scatter("散点图", "一年的降水量与蒸发量")
 //xais_name是设置横坐标名称，这里由于显示问题，还需要将y轴名称与y轴的距离进行设置
@@ -151,7 +151,7 @@ scatter.render()
 
 由于标题与图表是属于两个不同的控件，所以这里必须对下方的图表Line进行标题位置设置，否则会出现标题重叠的bug。
 
-```
+```python
 from pyecharts import Grid
 //设置折线图标题位置
 line = Line("折线图","一年的降水量与蒸发量",title_top="45%")
@@ -172,7 +172,7 @@ grid.render()
 
 ### 柱状图-状线图合并
 
-```csharp
+```python
 from pyecharts import Overlap
 overlap = Overlap()
 bar = Bar("柱状图-折线图合并", "一年的降水量与蒸发量")

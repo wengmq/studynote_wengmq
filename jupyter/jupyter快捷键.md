@@ -1,0 +1,24 @@
+# jupyter 快捷键
+
+- 基础快捷键：
+  - H：查看快捷键
+  - Enter：进入命令模式
+  - ESC：退出命令模式
+  - Shift+Enter：运行本单元，并选中下一单元
+  - Ctrl+Enter：运行本单元
+  - Alt+Enter：运行本单元，在下方插入新单元
+  - Ctrl+S：保存
+- 控制类快捷键：
+  - A：在上方插入新单元
+  - B：在下方插入新单元
+  - X：剪贴当前单元
+  - D，D：删除当前单元
+- 编辑类快捷键：
+  - Tab : 代码补全或缩进
+  - Ctrl-Home : 跳到单元开头
+  - Ctrl-End : 跳到单元末尾
+  - Ctrl-Left : 跳到左边一个字首
+  - Ctrl-Right : 跳到右边一个字首
+  - Ctrl-Backspace : 删除前面一个字
+  - Ctrl-Delete : 删除后面一个字
+  - Ctrl-Shift-(减号) : 分割单元
