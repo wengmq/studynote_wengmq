@@ -1,33 +1,20 @@
-## 记住看小电影前一定要检查一下域名是不是 HTTPS 的，不然……
+## https入门
 
-mokeyWie [裸睡的猪](javascript:void(0);) 
+参考：https://mp.weixin.qq.com/s/A8R4Vk_74ixPBgrOZmTbbQ
 
-------
+# **1. HTTP 协议**
 
-
-
-**1. HTTP 协议**
-
-在谈论 HTTPS 协议之前，先来回顾一下 HTTP 协议的概念。**
-**
+在谈论 HTTPS 协议之前，先来回顾一下 HTTP 协议的概念。
 
 ### 1.1 HTTP 协议介绍
 
 HTTP 协议是一种基于文本的传输协议，它位于 OSI 网络模型中的应用层。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByWBctFwjCkJIDLK4WUqRYEkIJS3KcyuKhXa1iacQwBqnX5hnj8picaXDGQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135609924](../assets/https入门.assets/image-20201218135609924.png)
 
 HTTP 协议是通过客户端和服务器的请求应答来进行通讯，目前协议由之前的 RFC 2616 拆分成立六个单独的协议说明（RFC 7230、RFC 7231、RFC 7232、RFC 7233、RFC 7234、RFC 7235），通讯报文如下：
 
 请求
-
-- 
-- 
-- 
-- 
-- 
-- 
-- 
 
 ```
 POST http://www.baidu.com HTTP/1.1Host: www.baidu.comConnection: keep-aliveContent-Length: 7User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
@@ -35,15 +22,6 @@ wd=HTTP
 ```
 
 响应
-
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
 
 ```
 HTTP/1.1 200 OKConnection: Keep-AliveContent-Encoding: gzipContent-Type: text/html;charset=utf-8Date: Thu, 14 Feb 2019 07:23:49 GMTTransfer-Encoding: chunked
@@ -58,11 +36,11 @@ HTTP 协议使用起来确实非常的方便，但是它存在一个致命的缺
 
 小明在 JAVA 贴吧发帖，内容为我爱JAVA：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByW2FWI4BuMzicj0d4HMBo3Csdd7AIG9nSicQ03XLHoaibVoBmMMU0Hpc12Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135647161](../assets/https入门.assets/image-20201218135647161.png)
 
 被中间人进行攻击，内容修改为我爱PHP
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByWOOXyPvnGQ9W0x1e3eadr8xn6gYmiaZNIc33SxvjGgltiamAIedTp7tVQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135700928](../assets/https入门.assets/image-20201218135700928.png)
 
 小明被群嘲
 可以看到在 HTTP 传输过程中，中间人能看到并且修改 HTTP 通讯中所有的请求和响应内容，所以使用 HTTP 是非常的不安全的。
@@ -73,35 +51,33 @@ HTTP 协议使用起来确实非常的方便，但是它存在一个致命的缺
 
 双方约定加密方式
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByWZZzQticCJnFdge94g9eWicicrFgaUYrHUPe0VuUYH4XIJOYpnTIoUlK0g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135720285](../assets/https入门.assets/image-20201218135720285.png)
 
 使用 AES 加密报文
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByW85KcfywXMJxpPdoM3XGayuOFLgWflr7xD0cHJyA7e72icAHfkxjXGRQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135825309](../assets/https入门.assets/image-20201218135825309.png)
 
 这样看似中间人获取不到明文信息了，但其实在通讯过程中还是会以明文的方式暴露加密方式和秘钥，如果第一次通信被拦截到了，那么秘钥就会泄露给中间人，中间人仍然可以解密后续的通信：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByWiaEWthzJLleQQic7fznfdibaIIedJudkCOlgfmQk7bdbbYnq9RxoQm7gg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135838520](../assets/https入门.assets/image-20201218135838520.png)
 
-那么对于这种情况，我们肯定就会考虑能不能将秘钥进行加密不让中间人看到呢？答案是有的，采用非对称加密，我们可以通过 RSA 算法来实现。这个步骤实际操作也是比较简单的，在码匠笔记订阅号后台回复HTTPS就可以查看搭建HTTPS服务视频。
+那么对于这种情况，我们肯定就会考虑能不能将秘钥进行加密不让中间人看到呢？答案是有的，采用非对称加密，我们可以通过 RSA 算法来实现。
 
 在约定加密方式的时候由服务器生成一对公私钥，服务器将公钥返回给客户端，客户端本地生成一串秘钥(AES_KEY)用于对称加密，并通过服务器发送的公钥进行加密得到(AES_KEY_SECRET)，之后返回给服务端，服务端通过私钥将客户端发送的AES_KEY_SECRET进行解密得到AEK_KEY,最后客户端和服务器通过AEK_KEY进行报文的加密通讯，改造如下：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/QFzRdz9libEb7WfqrQ4iaJkEmGPe7B6ByW44O7mw5atqZwyibPH8Vq0xhKklswdWdwlfbuo0wycMu2AyVFqeXebHw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![image-20201218135905505](../assets/https入门.assets/image-20201218135905505.png)
 
 可以看到这种情况下中间人是窃取不到用于AES加密的秘钥，所以对于后续的通讯是肯定无法进行解密了，那么这样做就是绝对安全了吗？
 
 所谓道高一尺魔高一丈，中间人为了对应这种加密方法又想出了一个新的破解方案，既然拿不到AES_KEY，那我就把自己模拟成一个客户端和服务器端的结合体，在用户->中间人的过程中中间人模拟服务器的行为，这样可以拿到用户请求的明文，在中间人->服务器的过程中中间人模拟客户端行为，这样可以拿到服务器响应的明文，以此来进行中间人攻击：
 
-![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
-
+![image-20201218140536884](../assets/https入门.assets/image-20201218140536884.png)
 
 这一次通信再次被中间人截获，中间人自己也伪造了一对公私钥，并将公钥发送给用户以此来窃取客户端生成的AES_KEY，在拿到AES_KEY之后就能轻松的进行解密了。
 
 中间人这样为所欲为，就没有办法制裁下吗，当然有啊，接下来我们看看 HTTPS 是怎么解决通讯安全问题的。
 
-## 2. HTTPS 协议
+# 2. HTTPS 协议
 
 ### 2.1 HTTPS 简介
 
@@ -109,9 +85,7 @@ HTTPS 其实是SSL+HTTP的简称,当然现在SSL基本已经被TLS取代了，�
 
 其实SSL协议大致就和上一节非对称加密的性质一样，握手的过程中主要也是为了交换秘钥，然后再通讯过程中使用对称加密进行通讯，大概流程如下：
 
-
-
-![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![image-20201218141114727](../assets/https入门.assets/image-20201218141114727.png)
 
 这里我只是画了个示意图，其实真正的 SSL 握手会比这个复杂的多，但是性质还是差不多，而且我们这里需要关注的重点在于 HTTPS 是如何防止中间人攻击的。
 
@@ -125,7 +99,7 @@ HTTPS 其实是SSL+HTTP的简称,当然现在SSL基本已经被TLS取代了，�
 
 在 CA 认证体系中，所有的证书都是由权威机构来颁发，而权威机构的 CA 证书都是已经在操作系统中内置的，我们把这些证书称之为CA根证书：
 
-![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![image-20201218151349314](../assets/https入门.assets/image-20201218151349314.png)
 
 签发证书
 
@@ -133,9 +107,7 @@ HTTPS 其实是SSL+HTTP的简称,当然现在SSL基本已经被TLS取代了，�
 
 这里我们把百度的证书下载下来看看：
 
-![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
-可以看到百度是受信于GlobalSign G2，同样的GlobalSign G2是受信于GlobalSign R1，当客户端(浏览器)做证书校验时，会一级一级的向上做检查，直到最后的根证书，如果没有问题说明服务器证书是可以被信任的。
+![image-20201218151404547](../assets/https入门.assets/image-20201218151404547.png)可以看到百度是受信于GlobalSign G2，同样的GlobalSign G2是受信于GlobalSign R1，当客户端(浏览器)做证书校验时，会一级一级的向上做检查，直到最后的根证书，如果没有问题说明服务器证书是可以被信任的。
 
 如何验证服务器证书
 
@@ -143,7 +115,7 @@ HTTPS 其实是SSL+HTTP的简称,当然现在SSL基本已经被TLS取代了，�
 
 
 
-![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![image-20201218151429448](../assets/https入门.assets/image-20201218151429448.png)
 
 这里有趣的是，证书校验用的 RSA 是通过私钥加密证书签名，公钥解密来巧妙的验证证书有效性。
 
@@ -152,16 +124,3 @@ HTTPS 其实是SSL+HTTP的简称,当然现在SSL基本已经被TLS取代了，�
 ## 总结
 
 首先先通过对 HTTP 中间人攻击的来了解到 HTTP 为什么是不安全的，然后再从安全攻防的技术演变一直到 HTTPS 的原理概括，希望能让大家对 HTTPS 有个更深刻的了解。
-
-```
----END---
-```
-
-喜欢此内容的人还喜欢
-
-[他逝世近两年，父母仍不知情……他逝世近两年，父母仍不知情……...人民日报不喜欢不看的原因确定内容质量低 不看此公众号](javascript:void(0);)[聊一类适合在三亚用的笔记本聊一类适合在三亚用的笔记本...笔吧评测室不喜欢不看的原因确定内容质量低 不看此公众号](javascript:void(0);)[人们曾经争论，登月有什么用…人们曾经争论，登月有什么用…...观察者网不喜欢不看的原因确定内容质量低 不看此公众号](javascript:void(0);)
-
-![img](https://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MzI0OTc0MzAwNA==&mid=2247492089&idx=1&sn=6429ae33a5b235ad0ca0130b6d646a79&send_time=)
-
-微信扫一扫
-关注该公众号
