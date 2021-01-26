@@ -59,6 +59,6 @@ mysql> show tables;
 ## 查看表结构
 
 ```
-
+mysql> desc auth_group;
 ```
 
