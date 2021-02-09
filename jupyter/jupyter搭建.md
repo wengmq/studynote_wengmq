@@ -72,7 +72,8 @@ c.NotebookApp.port =8889 #指定访问的端口，默认是8888。
 c.NotebookApp.notebook_dir = u'/Users/wengmingqiang/python/BSTC/bstc/jupyter/tools/ ' # >即设置jupyter启动后默认的根目录
 
  
-4.    启动jupyter notebook --no-browser
+4.    启动
+
 
 [plain] view plain copy <code class="language-plain">[root@346086094cbe /]# jupyter notebook --allow-root    [W 17:17:04.106 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.    [I 17:17:04.111 NotebookApp] Serving notebooks from local directory: /    [I 17:17:04.112 NotebookApp] 0 active kernels    [I 17:17:04.112 NotebookApp] The Jupyter Notebook is running at:    [I 17:17:04.112 NotebookApp] http://[all ip addresses on your system]:8889/    [I 17:17:04.112 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).  </code> 
 
