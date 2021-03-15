@@ -42,6 +42,7 @@ pip install ipython  pip install jupyter
 $ jupyter notebook --generate-config
 Writing default config to: /Users/wengmingqiang/.jupyter/jupyter_notebook_config.py
 
+#/root/.jupyter/jupyter_notebook_config.py
 
 
 3. 生成密码：990124
@@ -63,6 +64,7 @@ Out[2]: 'argon2:$argon2id$v=19$m=10240,t=10,p=8$kZZtDJ3VoMO/Zzo41vyGTQ$XbqwFe/Yc
 3. 修改默认配置文件
 
 vim /Users/wengmingqiang/.jupyter/jupyter_notebook_config.py
+
 
 添加以下内容：
 c.NotebookApp.ip='*' #设置访问notebook的ip，*表示所有IP，这里设置ip为都可访问  

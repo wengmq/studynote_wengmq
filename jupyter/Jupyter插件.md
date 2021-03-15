@@ -2,7 +2,7 @@
 
 
 
-Jupyter notebook安装扩展插件
+# Jupyter notebook安装扩展插件
 
 1. 安装Jupyter Notebook
 

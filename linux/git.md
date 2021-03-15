@@ -1,5 +1,3 @@
-# git
-
 
 
 - Add 所以有改动的文件
@@ -49,3 +47,23 @@
 
 - 强行使用远程的master版本
   - git reset --hard origin/master
+
+
+
+- git rebase （合并commit）参考：https://mp.weixin.qq.com/s/qNqZvjy0RXC0MA5WdSUhAA
+
+  - git rebase -i HEAD~3  （编辑最近三次合并）
+  - 这里原来的pick 改成s，在wq退出
+  - ![image-20210315123840353](../assets/git.assets/image-20210315123840353.png)
+  - Git 确认新的base的名字
+  - git log查看commit记录
+  - git push --force origin feature 强制退送到远程分支
+
+  
+
+- 修改最近一次commit
+
+  - git add .
+  - git commit -- amend
+
+  
