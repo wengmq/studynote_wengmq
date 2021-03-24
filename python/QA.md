@@ -1,7 +1,7 @@
 # python QA
 
 <details>
-    <summary>简述面向对象中__new__和__init__区别</summary>
+    <summary>## 简述面向对象中__new__和__init__区别</summary>
 __init__是初始化方法，创建对象后，就立刻被默认调用了，可接收参数，如图
 
 ![image-20210324102558227](../assets/QA.assets/image-20210324102558227.png)
