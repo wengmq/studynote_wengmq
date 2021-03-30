@@ -17,3 +17,18 @@ __init__是初始化方法，创建对象后，就立刻被默认调用了，可
 ![image-20210324103006515](../assets/QA.assets/image-20210324103006515.png)
   </details>
 
+
+
+
+
+<details>
+  <summary>这个是标题</summary>
+  内容
+
+```python
+  if __name__ == "__main__": 
+    w = mywidget()
+    w.show()
+```
+
+</details>
