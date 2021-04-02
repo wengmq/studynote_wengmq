@@ -20,6 +20,7 @@ supervisor的配置参数较多，下面介绍一下常用的参数配置，详�
 
 <details>
   <summary>默认配置如下</summary>
+
 ```python
   ; Sample supervisor config file.
 
@@ -151,7 +152,6 @@ serverurl=unix:///var/run/supervisor/supervisor.sock ; use a unix:// URL  for a 
 [include]
 files = supervisord.d/*.ini
 ```
-
 </details>
 
 ## 配置管理进程
