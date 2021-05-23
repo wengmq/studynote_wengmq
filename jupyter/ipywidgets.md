@@ -1,4 +1,4 @@
-# cSipywidget使用指南
+# ipywidget使用指南
 
 ## 简介
 
