@@ -219,3 +219,30 @@ sed 's/要被取代的字串/新的字串/g'
 sed 的“ -i ”选项可以直接修改文件内容，这功能非常有帮助!举例来说，如果你有一个 100 万 行的文件，你要在第 100 行加某些文字，此时使用 vim 可能会疯掉!因为文件太大了!那怎 办?就利用 sed 啊!通过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订!很棒 吧!
 
 总之，这个 sed 不错用啦!而且很多的 shell script 都会使用到这个指令的功能~ sed 可以帮 助系统管理员管理好日常的工作喔!要仔细的学习呢!
+
+
+
+##### 范例八: 删除指定内容的行
+
+1.以删除文件example.txt中包含字符串"=yes"的行为例,example.txt文件有以下内容:
+
+dadasdfsadf=yes=sds
+
+dsdadasdkfk
+
+dsdsdds=sye
+
+kgfjdfdf=yes==-
+
+ 
+
+2.准备删除:
+
+sed -i '/=yes/d' example.txt
+
+ 
+
+3.删除后，example.txt的内容如下:
+
+dsdadasdkfk
+dsdsdds=sye

@@ -57,7 +57,7 @@
   - ![image-20210315123840353](../assets/git.assets/image-20210315123840353.png)
   - Git 确认新的base的名字
   - git log查看commit记录
-  - git push --force origin feature 强制退送到远程分支
+  - git push --force origin 分支名    （ 强制退送到远程分支）
 
   
 
